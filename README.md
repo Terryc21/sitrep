@@ -1,18 +1,30 @@
-# Xcode Workflow Skills (Archived)
+# Xcode Workflow Skills
 
-**This repository has been archived.** The active skills have moved to dedicated repos:
+> [!WARNING]
+> **This repository is archived.** The active skills have moved to two dedicated repos:
+>
+> ### [→ workflow-audit](https://github.com/Terryc21/workflow-audit)
+> 5-layer UI workflow audit for SwiftUI apps. Finds orphaned views, dead ends, buried buttons, dismiss traps, unwired data, and 20+ other issue categories. Claude Code plugin.
+>
+> ### [→ radar-suite](https://github.com/Terryc21/radar-suite)
+> 6 data-focused audit skills: data model completeness, time-bomb detection, UI path tracing, round-trip data flow verification, visual design consistency, and capstone ship/no-ship grading.
+>
+> **For bug reports, feature requests, or questions, please use the active repos. This one no longer accepts issues or PRs.**
 
-## Active Repos
+---
 
-### [Workflow Audit](https://github.com/Terryc21/workflow-audit)
-5-layer UI workflow audit for SwiftUI apps. Finds orphaned views, dead ends, buried buttons, dismiss traps, unwired data, and 20+ other issue categories. Standalone Claude Code plugin (3 skills).
+## Why this repo is archived
 
-### [Radar Suite](https://github.com/Terryc21/radar-suite)
-5 data-focused audit skills: data model completeness, UI path tracing, round-trip data flow verification, visual design consistency, and capstone aggregation with ship/no-ship grading. Claude Code plugin.
+The original `xcode-workflow-skills` bundled 25 skills into one plugin. Over time it became clear the skills fell into two clear families with different update cadences and scopes:
 
-## Discontinued Skills
+- **Workflow and navigation audits** moved to [workflow-audit](https://github.com/Terryc21/workflow-audit), which has since grown into a standalone 5-layer audit plugin.
+- **Data and correctness audits** moved to [radar-suite](https://github.com/Terryc21/radar-suite), a monorepo of six coordinated audit skills with cross-skill handoffs.
 
-The following skills from this repo are discontinued and will not be maintained:
+Splitting them let each family evolve independently without dragging unrelated changes through every release.
+
+## Discontinued skills
+
+The following skills from this repo are discontinued and will not be maintained. If you relied on any of them, see the "Recommended alternatives" section below for active projects that cover similar ground.
 
 | Skill | Description |
 |-------|-------------|
@@ -37,12 +49,12 @@ The following skills from this repo are discontinued and will not be maintained:
 | `/commands` | Skill listing |
 | `/enhanced-commands` | Skill listing with examples |
 
-### Recommended Alternatives
+## Recommended alternatives
 
-If you're looking for skills that cover similar ground, these are excellent:
+If you're looking for skills that cover similar ground to the discontinued list above, these are excellent:
 
-- **[Axiom](https://charleswiltgen.github.io/Axiom/)** by [Charles Wiltgen](https://github.com/CharlesWiltgen) — Comprehensive iOS development skills for Claude Code. Covers concurrency, memory debugging, SwiftUI performance, accessibility, build fixing, security, and much more. Highly recommended.
-- **Swift Pro Skills** by [Paul Hudson](https://github.com/twostraws) — SwiftData Pro, SwiftUI Pro, Swift Concurrency Pro, and Swift Testing Pro. Deep-dive code review and best practices for modern Swift development.
+- **[Axiom](https://charleswiltgen.github.io/Axiom/)** by [Charles Wiltgen](https://github.com/CharlesWiltgen). Comprehensive iOS development skills for Claude Code. Covers concurrency, memory debugging, SwiftUI performance, accessibility, build fixing, security, and much more. Highly recommended.
+- **Swift Pro Skills** by [Paul Hudson](https://github.com/twostraws). SwiftData Pro, SwiftUI Pro, Swift Concurrency Pro, and Swift Testing Pro. Deep-dive code review and best practices for modern Swift development.
 
 ## License
 
