@@ -1,7 +1,13 @@
 # Rating System — Shared Reference
 
-> **Imported by:** `workflow-audit/SKILL.md`, `plan/SKILL.md`
+> **Imported by:** `tech-talk-reportcard/SKILL.md`, `plain-talk-reportcard/SKILL.md`
 > **Source of truth** for rating format, column definitions, and indicator scales.
+>
+> ⚠️ **Header corrected 2026-08-11.** This file previously named `workflow-audit/SKILL.md`
+> and `plan/SKILL.md` as its importers — both moved to the
+> [workflow-audit](https://github.com/Terryc21/workflow-audit) repo, leaving this file
+> orphaned while the two report cards each kept their own inline copy of the scale. The
+> importers above are the real ones. See also `scan-discipline.md`.
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: tech-talk-reportcard
 description: 'Technical codebase analysis with A-F grades across 9 categories. Self-contained iOS/Swift audit with automated grep scanning, verification, and Issue Rating Tables. Triggers: "tech report card", "grade my codebase", "technical audit".'
-version: 3.0.0
+version: 3.1.0
 author: Terry Nyberg
 license: MIT
 allowed-tools: [Glob, Grep, Read, Write, AskUserQuestion]
@@ -22,30 +22,13 @@ All findings use the **Issue Rating Table** format. Do not use prose severity ta
 
 ## Step 1: Before Starting
 
-Ask the user about analysis options:
+📖 **Run the opening interview from `../shared/session-setup.md` § Opening interview.**
+It defines the CLAUDE.md and Timeline questions (plus the timeline grading adjustment)
+shared by all report-card skills.
+
+**Focus question — specific to this skill.** Use this as the third question:
 
 ```
-AskUserQuestion with questions:
-[
-  {
-    "question": "Should the analysis consider CLAUDE.md project instructions?",
-    "header": "CLAUDE.md",
-    "options": [
-      {"label": "Yes, use CLAUDE.md (Recommended)", "description": "Include project context, coding standards, and preferences from CLAUDE.md"},
-      {"label": "No, ignore CLAUDE.md", "description": "Perform unbiased analysis without project-specific instructions"}
-    ],
-    "multiSelect": false
-  },
-  {
-    "question": "What is your timeline?",
-    "header": "Timeline",
-    "options": [
-      {"label": "Pre-release", "description": "Preparing for App Store — urgency matters"},
-      {"label": "Post-release", "description": "App is live, ongoing improvement"},
-      {"label": "Planning phase", "description": "Gathering info for roadmap"}
-    ],
-    "multiSelect": false
-  },
   {
     "question": "Any categories to emphasize or skip?",
     "header": "Focus",
@@ -57,21 +40,16 @@ AskUserQuestion with questions:
     ],
     "multiSelect": true
   }
-]
 ```
 
-**If "Yes" for CLAUDE.md:** Read CLAUDE.md at the repo root and summarize its key points in 3-5 bullets. Use these guidelines throughout the analysis.
-
-**If "No":** Skip CLAUDE.md. Note in the report that it was intentionally excluded.
+**CLAUDE.md summary depth for this skill:** 3-5 technical bullets.
 
 ### Freshness
 
-Base all findings on current source code only. Do not read or reference
-files in `.agents/`, `scratch/`, or prior audit reports. Ignore cached
-findings from auto-memory or previous sessions. Every finding must come
-from scanning the actual codebase as it exists now.
-
-**Exception:** Reading a previous report card's **grades only** (not findings) for trend comparison is allowed in Step 2.
+📖 **Read `../shared/scan-discipline.md` § Freshness and follow it.** In short: current
+source only, never `.agents/`/`scratch/`/prior reports, with one exception for reading a
+previous report's **grades only** in Step 2. The shared file is authoritative — do not
+re-inline the rule here.
 
 ---
 
@@ -173,10 +151,12 @@ Grep pattern="@Query\s+(private\s+)?var" glob="**/*.swift"
 Grep pattern="(FileManager|Data\(contentsOf|String\(contentsOf)" glob="**/*View*.swift"
 
 # Missing [weak self] in closures
+# ⚠️ NO LOOKAHEAD — see "Regex constraint" below. These return every closure with a
+# capture list; you must read each hit and check whether the list contains weak/unowned.
 # FALSE POSITIVE: SwiftUI struct views don't need weak self — only flag in classes
-Grep pattern="\{\s*\[(?!weak|unowned)" glob="**/*ViewModel*.swift"
-Grep pattern="\{\s*\[(?!weak|unowned)" glob="**/*Manager*.swift"
-Grep pattern="\{\s*\[(?!weak|unowned)" glob="**/*Service*.swift"
+Grep pattern="\{\s*\[" glob="**/*ViewModel*.swift"
+Grep pattern="\{\s*\[" glob="**/*Manager*.swift"
+Grep pattern="\{\s*\[" glob="**/*Service*.swift"
 
 # Timer usage (potential battery drain)
 Grep pattern="Timer\.(scheduledTimer|publish)" glob="**/*.swift"
@@ -191,7 +171,17 @@ Grep pattern="startUpdatingLocation" glob="**/*.swift"
 
 ```bash
 # Missing @MainActor on ViewModel
-Grep pattern="(class|struct).*ViewModel(?!.*@MainActor)" glob="**/*ViewModel.swift"
+# ⚠️ NO LOOKAHEAD, and note WHY a line-scoped regex cannot answer this at all:
+# `@MainActor` sits ABOVE the declaration, so any same-line test is structurally blind
+# to it. Match declarations, then READ each hit.
+# ⚠️ When reading, scan the WHOLE attribute stack, not one line up. Real declarations
+#    stack 3-4 attributes (`@available` / `@MainActor` / `@Observable` / `final class`),
+#    so a 1-line window reports correctly-annotated types as violations. Read until you
+#    hit a blank line, a `}`, or an `import`.
+# ⚠️ A file named *ViewModel.swift need not CONTAIN a ViewModel — enum namespaces of
+#    static helpers are commonly parked there. No type, no finding. Grade on the types
+#    this pattern returns, never on the filename inventory.
+Grep pattern="(final )?(class|struct) \w*ViewModel" glob="**/*ViewModel.swift"
 
 # Dispatch to main thread (legacy pattern)
 # CLASSIFY: animation delay (asyncAfter) vs state update (async) vs layout workaround
@@ -275,21 +265,20 @@ Grep pattern="UserDefaults\.standard\.(set|object)" glob="**/*.swift"
 
 ## Step 5: Verification Rule (CRITICAL)
 
-Grep patterns produce CANDIDATES, not confirmed issues. Before reporting ANY finding:
+📖 **Read `../shared/scan-discipline.md` and follow it in full before compiling any
+finding.** It is the source of truth for three rules this skill depends on:
 
-1. **Read the flagged file** — at minimum 20 lines of context around the match
-2. **Check structural context** — a pattern inside a nested closure may be safe depending on the outer scope
-3. **Classify before reporting** — label each hit as CONFIRMED, FALSE_POSITIVE, or INTENTIONAL
-4. **Never report grep counts as issue counts** — e.g., "60 DispatchQueue.main calls" is a grep count; the real issue count requires classifying each call
-5. **INTENTIONAL hits** — note them in the category narrative as acknowledged design decisions (they support grading), but do NOT list them in the Issue Rating Table as issues
+- **§ Regex constraint** — no lookahead/lookbehind, ever. Look-around matches nothing
+  under the default Grep engine and **exits 0**, so an un-run scan grades **A** under
+  Step 6's "0-1 confirmed findings" rule. Silent, and biased toward a flattering grade.
+- **§ Verification Rule** — grep produces CANDIDATES; read and classify each hit as
+  CONFIRMED / FALSE_POSITIVE / INTENTIONAL before it becomes a finding. Never report a
+  grep count as an issue count.
+- **§ Reading traps** — read the whole attribute stack, not one line up; a filename is
+  not a type.
 
-**Common false positives:**
-- `Task {}` inside `@MainActor` class/view body → inherits isolation, safe
-- `DispatchQueue.main.asyncAfter` for animation/layout → intentional
-- `nonisolated` on protocol requirement methods → required by protocol
-- `http://` in XML namespace URIs → not a real HTTP endpoint
-- `as!` after `guard let` or `is` check → already validated
-- `try?` in optional chaining for expected-nil paths → intentional
+Do not re-inline those rules here. They are shared with `plain-talk-reportcard`
+specifically so a fix lands in both skills at once.
 
 ---
 
@@ -405,7 +394,10 @@ Consolidate ALL findings into a single Issue Rating Table, sorted by urgency des
 | 2 | ... | 🟡 High | ... | ... | ... | ... | ... |
 ```
 
-Use the Issue Rating scale:
+📖 **Column definitions, indicator scales, and the one-table hard rule:
+`../shared/rating-system.md`** — the source of truth, shared with
+`plain-talk-reportcard`. Quick reference:
+
 - **Urgency:** 🔴 CRITICAL (pre-launch blocker/crash risk) · 🟡 HIGH (fix before release) · 🟢 MEDIUM (schedule it) · ⚪ LOW (nice-to-have)
 - **Risk Fix/No Fix:** 🔴 Critical · 🟡 High · 🟢 Medium · ⚪ Low
 - **ROI:** 🟠 Excellent · 🟢 Good · 🟡 Marginal · 🔴 Poor
@@ -431,27 +423,8 @@ Medium-term (This Quarter):
 
 ## Step 8: Follow-up
 
-After presenting the report, ask:
-
-```
-AskUserQuestion with questions:
-[
-  {
-    "question": "What would you like to do next?",
-    "header": "Next",
-    "options": [
-      {"label": "Fix critical issues now", "description": "Walk through each critical/high issue with code fixes"},
-      {"label": "Create implementation plan", "description": "Generate a prioritized plan from the findings"},
-      {"label": "Report is sufficient", "description": "End here — report saved to .agents/research/"}
-    ],
-    "multiSelect": false
-  }
-]
-```
-
-If "Fix critical issues now": Walk through each 🔴/🟡 finding, show the problematic code, propose a fix, and apply after user approval.
-
-If "Create implementation plan": Group findings into phases and present as a structured plan.
+📖 **Use the menu in `../shared/session-setup.md` § Follow-up menu**, including its
+handling of each option. Nothing here diverges from the shared version.
 
 ---
 

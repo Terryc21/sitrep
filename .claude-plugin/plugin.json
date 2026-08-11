@@ -1,6 +1,6 @@
 {
   "name": "xcode-workflow-skills",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Xcode development workflow skills - testing, debugging, refactoring, release prep, and code analysis",
   "author": {
     "name": "Terry Nyberg"

@@ -1,7 +1,7 @@
 ---
 name: plain-talk-reportcard
 description: 'Codebase analysis with A-F grades explained in plain language for non-technical stakeholders. Self-contained iOS/Swift audit. Triggers: "plain talk report card", "stakeholder report", "non-technical audit".'
-version: 3.0.0
+version: 3.1.0
 author: Terry Nyberg
 license: MIT
 allowed-tools: [Glob, Grep, Read, Write, AskUserQuestion]
@@ -22,30 +22,13 @@ All findings use the **Issue Rating Table** format. Include a brief plain-langua
 
 ## Step 1: Before Starting
 
-Ask the user about analysis options:
+📖 **Run the opening interview from `../shared/session-setup.md` § Opening interview.**
+It defines the CLAUDE.md and Timeline questions (plus the timeline grading adjustment)
+shared by all report-card skills.
+
+**Focus question — specific to this skill.** Use this as the third question:
 
 ```
-AskUserQuestion with questions:
-[
-  {
-    "question": "Should the analysis consider CLAUDE.md project instructions?",
-    "header": "CLAUDE.md",
-    "options": [
-      {"label": "Yes, use CLAUDE.md (Recommended)", "description": "Include project context and team preferences"},
-      {"label": "No, ignore CLAUDE.md", "description": "Fresh perspective without project-specific context"}
-    ],
-    "multiSelect": false
-  },
-  {
-    "question": "What is your timeline?",
-    "header": "Timeline",
-    "options": [
-      {"label": "Pre-release", "description": "Preparing for App Store — urgency matters"},
-      {"label": "Post-release", "description": "App is live, ongoing improvement"},
-      {"label": "Planning phase", "description": "Gathering info for roadmap"}
-    ],
-    "multiSelect": false
-  },
   {
     "question": "Any areas to emphasize?",
     "header": "Focus",
@@ -57,21 +40,17 @@ AskUserQuestion with questions:
     ],
     "multiSelect": false
   }
-]
 ```
 
-**If "Yes" for CLAUDE.md:** Read CLAUDE.md and summarize in 2-3 non-technical bullets.
-
-**If "No":** Skip CLAUDE.md. Note in the report that it was intentionally excluded.
+**CLAUDE.md summary depth for this skill:** 2-3 **non-technical** bullets — no framework
+names or API references.
 
 ### Freshness
 
-Base all findings on current source code only. Do not read or reference
-files in `.agents/`, `scratch/`, or prior audit reports. Ignore cached
-findings from auto-memory or previous sessions. Every finding must come
-from scanning the actual codebase as it exists now.
-
-**Exception:** Reading a previous report's **grades only** for trend comparison is allowed in Step 2.
+📖 **Read `../shared/scan-discipline.md` § Freshness and follow it.** In short: current
+source only, never `.agents/`/`scratch/`/prior reports, with one exception for reading a
+previous report's **grades only** in Step 2. The shared file is authoritative — do not
+re-inline the rule here.
 
 ---
 
@@ -238,13 +217,23 @@ Grep pattern="import XCTest" glob="**/*Test*.swift" output_mode="count"
 
 ## Step 5: Verification Rule (CRITICAL)
 
-Grep patterns produce CANDIDATES, not confirmed issues. Before reporting ANY finding to a non-technical stakeholder:
+📖 **Read `../shared/scan-discipline.md` and follow it in full before compiling any
+finding.** It is the source of truth for the regex constraint (no lookahead — it matches
+nothing and exits 0, silently grading a category **A** on an un-run scan), the
+candidate-vs-finding rule, and the reading traps. Do not re-inline those rules here; they
+are shared with `tech-talk-reportcard` so a fix lands in both at once.
 
-1. **Read the flagged file** — at minimum 20 lines of context
-2. **Classify** — CONFIRMED, FALSE_POSITIVE, or INTENTIONAL
-3. **Never report grep counts as issue counts** — e.g., "150 crash-prone patterns" from matching `!` is misleading; most `!` characters are negations, not force unwraps
-4. **Only report confirmed issues** — false positives are especially damaging for non-technical audiences who can't evaluate accuracy
-5. **INTENTIONAL hits** — note them in the category summary as acknowledged design decisions (e.g., "Some hardcoded font sizes are intentional to prevent clipping"), but do NOT list them as issues in the Issue Rating Table
+**Additional rule for THIS skill's audience** (not in the shared file, because it applies
+only to a non-technical report):
+
+- **Only report CONFIRMED issues.** A false positive is far more damaging here than in a
+  technical report — a non-technical stakeholder cannot evaluate its accuracy, so a wrong
+  finding is indistinguishable from a right one and erodes trust in the whole report.
+  When in doubt, leave it out and mention the uncertainty in the category narrative
+  instead.
+- When explaining an INTENTIONAL hit in the category summary, say why it is deliberate in
+  plain terms (e.g., "some text sizes are fixed on purpose so labels don't get cut off"),
+  not just that it was classified as intentional.
 
 ---
 
@@ -373,10 +362,18 @@ Then render the full Issue Rating Table sorted by urgency descending, then ROI:
 | 1 | ... | 🔴 Critical | ... | ... | ... | ... | ... |
 ```
 
-Use the standard scale:
+📖 **Column definitions, indicator scales, and the one-table hard rule:
+`../shared/rating-system.md`** — the source of truth, shared with
+`tech-talk-reportcard`. Quick reference:
+
 - **Urgency:** 🔴 CRITICAL · 🟡 HIGH · 🟢 MEDIUM · ⚪ LOW
 - **ROI:** 🟠 Excellent · 🟢 Good · 🟡 Marginal · 🔴 Poor
 - **Fix Effort:** Trivial / Small / Medium / Large
+
+⚠️ This skill deliberately shows a **reduced** column set — Risk:Fix, Risk:No Fix, and
+Blast Radius are omitted because they need technical judgment a non-technical reader
+cannot apply. That is an intentional divergence from the shared spec, not drift. Keep the
+columns you do show identical to the shared definitions.
 
 ### 9. Recommended Next Steps
 
@@ -397,27 +394,10 @@ Eventually (Backlog):
 
 ## Step 8: Follow-up
 
-After presenting the report:
-
-```
-AskUserQuestion with questions:
-[
-  {
-    "question": "What would you like to do next?",
-    "header": "Next",
-    "options": [
-      {"label": "Fix critical issues now", "description": "Walk through each critical/high issue with fixes"},
-      {"label": "Create an action plan", "description": "Generate a prioritized implementation plan"},
-      {"label": "Report is sufficient", "description": "End here — report saved to .agents/research/"}
-    ],
-    "multiSelect": false
-  }
-]
-```
-
-If "Fix critical issues now": Walk through each 🔴/🟡 finding, show the problematic code, propose a fix, apply after user approval.
-
-If "Create an action plan": Group findings into phases and present as a structured plan.
+📖 **Use the menu in `../shared/session-setup.md` § Follow-up menu**, including its
+handling of each option. (This skill previously labelled the middle option "Create an
+action plan" rather than "Create implementation plan" — a drift with no purpose. Use the
+shared wording.)
 
 ---
 
