@@ -1,11 +1,11 @@
 {
-  "name": "xcode-workflow-skills",
+  "name": "sitrep",
   "version": "2.3.0",
-  "description": "Xcode development workflow skills - testing, debugging, refactoring, release prep, and code analysis",
+  "description": "A situation report for your iOS/Swift codebase: A-F grades for engineers and for stakeholders, every finding verified in source, coverage declared",
   "author": {
     "name": "Terry Nyberg"
   },
-  "repository": "https://github.com/Terryc21/xcode-workflow-skills",
+  "repository": "https://github.com/Terryc21/sitrep",
   "license": "MIT",
-  "keywords": ["xcode", "ios", "swift", "testing", "debugging", "workflow"]
+  "keywords": ["ios", "swift", "audit", "grading", "report-card", "code-quality"]
 }

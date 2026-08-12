@@ -3,7 +3,7 @@
 Generated: 2026-02-24
 Plugin Version: 2.1.0
 
-This document contains the full prompts for all custom commands in the xcode-workflow-skills plugin.
+This document contains the full prompts for all custom commands in the sitrep plugin (formerly xcode-workflow-skills).
 
 ---
 

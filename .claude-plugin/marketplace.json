@@ -1,21 +1,21 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "xcode-workflow-skills",
-  "description": "Xcode development workflow skills - testing, debugging, refactoring, release prep, and code analysis",
+  "name": "sitrep",
+  "description": "A situation report for your iOS/Swift codebase: A-F grades for engineers and for stakeholders, every finding verified in source, coverage declared",
   "owner": {
     "name": "Terry Nyberg"
   },
   "plugins": [
     {
-      "name": "xcode-workflow-skills",
-      "description": "Xcode development workflow skills - testing, debugging, refactoring, release prep, and code analysis",
+      "name": "sitrep",
+      "description": "A situation report for your iOS/Swift codebase: A-F grades for engineers and for stakeholders, every finding verified in source, coverage declared",
       "version": "2.3.0",
       "author": {
         "name": "Terry Nyberg"
       },
       "source": "./",
       "category": "development",
-      "homepage": "https://github.com/Terryc21/xcode-workflow-skills",
+      "homepage": "https://github.com/Terryc21/sitrep",
       "license": "MIT"
     }
   ]

@@ -4,8 +4,14 @@ All notable changes to these Claude Code skills will be documented in this file.
 
 ## [2.3.0] - 2026-08-11
 
-Repo unarchived. The two report-card skills go to **3.1.0**; the plugin manifests to
-**2.3.0**. Minor, not patch: a scan that never ran now runs.
+Repo unarchived and **renamed `xcode-workflow-skills` → `sitrep`**. The two report-card
+skills go to **3.1.0**; the plugin manifests to **2.3.0**. Minor, not patch: a scan that
+never ran now runs.
+
+**Rename note.** GitHub redirects the old URL indefinitely, so existing clones and links
+keep working — but only for as long as no new repo claims the name
+`xcode-workflow-skills`. Do not create one. The plugin manifest's `name` field changed
+too, so anyone who installed from the marketplace under the old name should reinstall.
 
 ⚠️ **Note on the gap in this file.** Entries jump from 1.1.0 (February) to 2.3.0 — the
 manifests had reached 2.2.0 and individual skills 2.1.0–3.0.0 with no changelog entries
