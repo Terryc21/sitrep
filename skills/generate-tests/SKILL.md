@@ -3,7 +3,7 @@ name: generate-tests
 description: 'Generate unit and UI tests for specified code with edge cases and mocks. Triggers: "generate tests", "write tests", "add tests", "test coverage".'
 version: 2.1.0
 author: Terry Nyberg
-license: MIT
+license: Apache-2.0
 allowed-tools: [Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion]
 metadata:
   tier: execution

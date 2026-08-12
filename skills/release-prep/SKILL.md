@@ -3,7 +3,7 @@ name: release-prep
 description: 'Pre-release checklist: version bump, changelog, privacy manifest, store metadata, archive readiness. Triggers: "release prep", "prepare release", "ready to ship", "pre-release checklist".'
 version: 2.1.0
 author: Terry Nyberg
-license: MIT
+license: Apache-2.0
 allowed-tools: [Read, Grep, Glob, Bash, Edit, Write, AskUserQuestion]
 metadata:
   tier: execution

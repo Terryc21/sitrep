@@ -16,7 +16,7 @@
       "source": "./",
       "category": "development",
       "homepage": "https://github.com/Terryc21/sitrep",
-      "license": "MIT"
+      "license": "Apache-2.0"
     }
   ]
 }

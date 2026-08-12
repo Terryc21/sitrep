@@ -3,7 +3,7 @@ name: tech-talk
 description: 'Technical codebase analysis with A-F grades across 9 categories. Self-contained iOS/Swift audit with automated grep scanning, verification, and Issue Rating Tables. Triggers: "tech talk", "tech report card", "grade my codebase", "technical audit", "sitrep".'
 version: 3.1.0
 author: Terry Nyberg
-license: MIT
+license: Apache-2.0
 allowed-tools: [Glob, Grep, Read, Write, AskUserQuestion]
 metadata:
   tier: analysis

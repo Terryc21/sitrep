@@ -79,7 +79,7 @@ For ground the discontinued skills used to cover:
 
 ## License
 
-MIT
+Apache-2.0
 
 ## Author
 

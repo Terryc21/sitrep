@@ -3,7 +3,7 @@ name: plain-talk
 description: 'Codebase analysis with A-F grades explained in plain language for non-technical stakeholders. Self-contained iOS/Swift audit. Triggers: "plain talk", "plain talk report card", "stakeholder report", "non-technical audit".'
 version: 3.1.0
 author: Terry Nyberg
-license: MIT
+license: Apache-2.0
 allowed-tools: [Glob, Grep, Read, Write, AskUserQuestion]
 metadata:
   tier: analysis

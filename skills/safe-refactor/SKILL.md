@@ -3,7 +3,7 @@ name: safe-refactor
 description: 'Plan refactoring with blast radius analysis, dependency mapping, and rollback strategy. Triggers: "refactor", "safe refactor", "restructure", "rename type", "extract protocol".'
 version: 2.5.0
 author: Terry Nyberg
-license: MIT
+license: Apache-2.0
 allowed-tools: [Glob, Grep, Read, Bash, Edit, Write, LSP, AskUserQuestion]
 metadata:
   tier: analysis

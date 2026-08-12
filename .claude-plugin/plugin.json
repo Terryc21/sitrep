@@ -6,6 +6,6 @@
     "name": "Terry Nyberg"
   },
   "repository": "https://github.com/Terryc21/sitrep",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "keywords": ["ios", "swift", "audit", "grading", "report-card", "code-quality"]
 }
