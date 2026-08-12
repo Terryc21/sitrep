@@ -56,7 +56,7 @@ LOOKAROUND_RE = re.compile(r'\(\?[=!<]')
 
 def extract_patterns():
     found = []
-    for skill in ("tech-talk-reportcard", "plain-talk-reportcard"):
+    for skill in ("tech-talk", "plain-talk"):
         f = SKILLS / skill / "SKILL.md"
         if not f.exists():
             continue
@@ -144,14 +144,14 @@ if CAP_PAT:
 
 # --- 5. category weights sum to 100% -----------------------------------------
 print("\ngrading integrity:")
-tech = (SKILLS / "tech-talk-reportcard" / "SKILL.md").read_text()
+tech = (SKILLS / "tech-talk" / "SKILL.md").read_text()
 weights = [int(m) for m in re.findall(r"\|\s*(\d{1,2})%\s*\|", tech)]
 check("category weights sum to 100", sum(weights), 100)
 
 # --- 6. shared references resolve --------------------------------------------
 print("\nshared references:")
 dangling = []
-for skill in ("tech-talk-reportcard", "plain-talk-reportcard"):
+for skill in ("tech-talk", "plain-talk"):
     f = SKILLS / skill / "SKILL.md"
     for ref in set(re.findall(r"\.\./shared/([a-z-]+\.md)", f.read_text())):
         if not (SKILLS / "shared" / ref).exists():

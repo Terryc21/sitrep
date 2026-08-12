@@ -17,7 +17,20 @@ too, so anyone who installed from the marketplace under the old name should rein
 manifests had reached 2.2.0 and individual skills 2.1.0–3.0.0 with no changelog entries
 in between. Those intermediate changes are not reconstructed here.
 
-### tech-talk-reportcard (3.0.0 → 3.1.0)
+### Skills renamed
+
+`tech-talk-reportcard` → **`tech-talk`** · `plain-talk-reportcard` → **`plain-talk`**
+
+The `-reportcard` suffix restated what the repo name now carries, and "report card" is the
+artifact The Honest Machine ch. 8 indicts — a letter grade that reads as an answer.
+`tech-talk` / `plain-talk` name the *register* instead: the same examination, told two
+ways. Invocation becomes `/tech-talk` and `/plain-talk`; the old command names stop
+working. Directory, frontmatter `name:`, and installed symlink were moved together — a
+mismatch between any two of those three silently breaks skill loading.
+
+Historical entries below (1.0.0, February) keep the original names on purpose.
+
+### tech-talk (3.0.0 → 3.1.0)
 
 - 🔴 **FIXED: the Concurrency scan never ran.** `(class|struct).*ViewModel(?!.*@MainActor)`
   used negative lookahead, which the default Grep engine does not support. The pattern did
@@ -30,7 +43,7 @@ in between. Those intermediate changes are not reconstructed here.
 - Both replaced with match-then-filter, which the skill's own verification rule already
   required.
 
-### plain-talk-reportcard (3.0.0 → 3.1.0)
+### plain-talk (3.0.0 → 3.1.0)
 
 - Audience-specific rules preserved and sharpened (confirmed-issues-only; explain
   INTENTIONAL hits in plain terms).

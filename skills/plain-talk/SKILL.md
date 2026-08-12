@@ -1,6 +1,6 @@
 ---
-name: plain-talk-reportcard
-description: 'Codebase analysis with A-F grades explained in plain language for non-technical stakeholders. Self-contained iOS/Swift audit. Triggers: "plain talk report card", "stakeholder report", "non-technical audit".'
+name: plain-talk
+description: 'Codebase analysis with A-F grades explained in plain language for non-technical stakeholders. Self-contained iOS/Swift audit. Triggers: "plain talk", "plain talk report card", "stakeholder report", "non-technical audit".'
 version: 3.1.0
 author: Terry Nyberg
 license: MIT
@@ -221,7 +221,7 @@ Grep pattern="import XCTest" glob="**/*Test*.swift" output_mode="count"
 finding.** It is the source of truth for the regex constraint (no lookahead — it matches
 nothing and exits 0, silently grading a category **A** on an un-run scan), the
 candidate-vs-finding rule, and the reading traps. Do not re-inline those rules here; they
-are shared with `tech-talk-reportcard` so a fix lands in both at once.
+are shared with `tech-talk` so a fix lands in both at once.
 
 **Additional rule for THIS skill's audience** (not in the shared file, because it applies
 only to a non-technical report):
@@ -364,7 +364,7 @@ Then render the full Issue Rating Table sorted by urgency descending, then ROI:
 
 📖 **Column definitions, indicator scales, and the one-table hard rule:
 `../shared/rating-system.md`** — the source of truth, shared with
-`tech-talk-reportcard`. Quick reference:
+`tech-talk`. Quick reference:
 
 - **Urgency:** 🔴 CRITICAL · 🟡 HIGH · 🟢 MEDIUM · ⚪ LOW
 - **ROI:** 🟠 Excellent · 🟢 Good · 🟡 Marginal · 🔴 Poor
@@ -435,4 +435,4 @@ When these terms appear in code or scan results, translate them for the reader:
 | Can't determine app purpose | Read the app entry point, main navigation, and 2-3 views |
 | Too many grep hits to verify | Narrow the glob pattern to specific directories |
 | Category has no findings | Grade A — note "No issues detected" and list what was scanned |
-| Stakeholder wants technical detail | Point them to `/tech-talk-reportcard` for the developer version |
+| Stakeholder wants technical detail | Point them to `/tech-talk` for the developer version |

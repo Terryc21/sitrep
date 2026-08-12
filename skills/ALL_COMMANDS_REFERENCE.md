@@ -13,8 +13,8 @@ This document contains the full prompts for all custom commands in the sitrep pl
 |---------|---------|-------------|
 | [/commands](#commands) | 1.0.0 | Display list of all available custom commands |
 | [/enhanced-commands](#enhanced-commands) | 2.0.0 | Detailed reference with parameters and examples |
-| [/tech-talk-reportcard](#tech-talk-reportcard) | 2.0.0 | Technical codebase analysis with A-F grades |
-| [/plain-talk-reportcard](#plain-talk-reportcard) | 2.0.0 | Plain-language analysis for stakeholders |
+| [/tech-talk](#tech-talk) | 2.0.0 | Technical codebase analysis with A-F grades |
+| [/plain-talk](#plain-talk) | 2.0.0 | Plain-language analysis for stakeholders |
 | [/scan-similar-bugs](#scan-similar-bugs) | 1.0.0 | Find other occurrences of a bug pattern |
 | [/review-changes](#review-changes) | 1.1.0 | Pre-commit review of staged changes |
 | [/dead-code-scanner](#dead-code-scanner) | 1.0.0 | Find unused code in the codebase |
@@ -40,8 +40,8 @@ These commands complement [Axiom](https://github.com/CharlesWiltgen/Axiom) for i
 
 | Command | Axiom Skills |
 |---------|--------------|
-| `/tech-talk-reportcard` | `axiom-swiftui-architecture`, `axiom-ios-performance`, `axiom-ios-concurrency`, `axiom-ios-accessibility`, `axiom-ios-testing` |
-| `/plain-talk-reportcard` | `axiom-ios-accessibility`, `axiom-ios-ui`, `axiom-hig` |
+| `/tech-talk` | `axiom-swiftui-architecture`, `axiom-ios-performance`, `axiom-ios-concurrency`, `axiom-ios-accessibility`, `axiom-ios-testing` |
+| `/plain-talk` | `axiom-ios-accessibility`, `axiom-ios-ui`, `axiom-hig` |
 | `/security-audit` | `axiom-storage-diag`, `axiom-file-protection-ref` |
 | `/performance-check` | `axiom-swift-performance`, `axiom-swiftui-performance`, `axiom-ios-performance` |
 | `/debug` | `axiom-memory-debugging`, `axiom-hang-diagnostics` |
@@ -69,7 +69,7 @@ See: `skills/enhanced-commands/SKILL.md`
 
 ---
 
-# /tech-talk-reportcard
+# /tech-talk
 
 **Version:** 2.0.0
 **Description:** Technical codebase analysis with A-F grades for architecture, security, performance, concurrency, accessibility, code quality, UI, testing, and tooling
@@ -82,11 +82,11 @@ See: `skills/enhanced-commands/SKILL.md`
 - Deep dive option invoking Axiom skills
 - Output to `.agents/research/YYYY-MM-DD-tech-reportcard.md`
 
-See: `skills/tech-talk-reportcard/SKILL.md`
+See: `skills/tech-talk/SKILL.md`
 
 ---
 
-# /plain-talk-reportcard
+# /plain-talk
 
 **Version:** 2.0.0
 **Description:** Codebase analysis with A-F grades and plain-language summaries for non-technical stakeholders
@@ -99,7 +99,7 @@ See: `skills/tech-talk-reportcard/SKILL.md`
 - Recommended action timeline
 - Output to `.agents/research/YYYY-MM-DD-plain-reportcard.md`
 
-See: `skills/plain-talk-reportcard/SKILL.md`
+See: `skills/plain-talk/SKILL.md`
 
 ---
 

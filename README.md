@@ -11,8 +11,8 @@ once for engineers, once for the people who fund them.
 
 | Skill | Audience | What you get |
 |-------|----------|--------------|
-| `tech-talk-reportcard` | Developers | A-F grades across 9 categories (Architecture, Security, Performance, Concurrency, Accessibility, Testing, and more), a consolidated Issue Rating Table, and next steps grouped by timeline |
-| `plain-talk-reportcard` | Stakeholders | The same examination explained in plain language, with only confirmed issues reported. A false positive is worse than a missed one when the reader can't evaluate accuracy |
+| `tech-talk` | Developers | A-F grades across 9 categories (Architecture, Security, Performance, Concurrency, Accessibility, Testing, and more), a consolidated Issue Rating Table, and next steps grouped by timeline |
+| `plain-talk` | Stakeholders | The same examination explained in plain language, with only confirmed issues reported. A false positive is worse than a missed one when the reader can't evaluate accuracy |
 
 Shared discipline lives in `skills/shared/` and is imported by both:
 

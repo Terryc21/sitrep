@@ -1,6 +1,6 @@
 ---
-name: tech-talk-reportcard
-description: 'Technical codebase analysis with A-F grades across 9 categories. Self-contained iOS/Swift audit with automated grep scanning, verification, and Issue Rating Tables. Triggers: "tech report card", "grade my codebase", "technical audit".'
+name: tech-talk
+description: 'Technical codebase analysis with A-F grades across 9 categories. Self-contained iOS/Swift audit with automated grep scanning, verification, and Issue Rating Tables. Triggers: "tech talk", "tech report card", "grade my codebase", "technical audit", "sitrep".'
 version: 3.1.0
 author: Terry Nyberg
 license: MIT
@@ -277,7 +277,7 @@ finding.** It is the source of truth for three rules this skill depends on:
 - **§ Reading traps** — read the whole attribute stack, not one line up; a filename is
   not a type.
 
-Do not re-inline those rules here. They are shared with `plain-talk-reportcard`
+Do not re-inline those rules here. They are shared with `plain-talk`
 specifically so a fix lands in both skills at once.
 
 ---
@@ -396,7 +396,7 @@ Consolidate ALL findings into a single Issue Rating Table, sorted by urgency des
 
 📖 **Column definitions, indicator scales, and the one-table hard rule:
 `../shared/rating-system.md`** — the source of truth, shared with
-`plain-talk-reportcard`. Quick reference:
+`plain-talk`. Quick reference:
 
 - **Urgency:** 🔴 CRITICAL (pre-launch blocker/crash risk) · 🟡 HIGH (fix before release) · 🟢 MEDIUM (schedule it) · ⚪ LOW (nice-to-have)
 - **Risk Fix/No Fix:** 🔴 Critical · 🟡 High · 🟢 Medium · ⚪ Low

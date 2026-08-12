@@ -1,6 +1,6 @@
 # Scan Discipline — Shared Reference
 
-> **Imported by:** `tech-talk-reportcard/SKILL.md`, `plain-talk-reportcard/SKILL.md`
+> **Imported by:** `tech-talk/SKILL.md`, `plain-talk/SKILL.md`
 > **Source of truth** for the freshness rule, the regex constraint, and the
 > candidate-vs-finding verification rule.
 >

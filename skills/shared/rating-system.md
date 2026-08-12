@@ -1,6 +1,6 @@
 # Rating System — Shared Reference
 
-> **Imported by:** `tech-talk-reportcard/SKILL.md`, `plain-talk-reportcard/SKILL.md`
+> **Imported by:** `tech-talk/SKILL.md`, `plain-talk/SKILL.md`
 > **Source of truth** for rating format, column definitions, and indicator scales.
 >
 > ⚠️ **Header corrected 2026-08-11.** This file previously named `workflow-audit/SKILL.md`

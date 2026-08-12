@@ -1,6 +1,6 @@
 # Session Setup — Shared Reference
 
-> **Imported by:** `tech-talk-reportcard/SKILL.md`, `plain-talk-reportcard/SKILL.md`
+> **Imported by:** `tech-talk/SKILL.md`, `plain-talk/SKILL.md`
 > **Source of truth** for the opening interview, the trend check, and the follow-up menu.
 >
 > ⚠️ Each importer had its own copy of these blocks and they had already drifted (the
